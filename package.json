@@ -26,7 +26,7 @@
     "ava": "^6.2.0",
     "folder-hash": "^4.1.0",
     "tap-xunit": "^2.4.1",
-    "terser-webpack-plugin": "^5.3.12",
+    "terser-webpack-plugin": "^5.3.13",
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
