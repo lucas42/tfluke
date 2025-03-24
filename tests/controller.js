@@ -337,7 +337,7 @@ test('Vehicle Partial Render', async test => {
 	function dataFetcher() {
 		test.fail("Unneeded call to dataFetcher");
 	}
-	const result = await Controller(getTemplate, dataFetcher).process('/vehicle/net1/route1/14', {accept: 'text/partial-html'});
+	const result = await Controller(getTemplate, dataFetcher).process('/vehicle/net1/route1/9015450000602417', {accept: 'text/partial-html'});
 	test.is(result.action, 'response');
 	test.is(result.body, 'vehicle Galaxy Clipper (ROUTEFACE)');
 	test.deepEqual(result.headers, {
