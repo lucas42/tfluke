@@ -9,7 +9,7 @@ var route1 = new Route(net1, 'route1');
 route1.setField('name', "Routeface");
 var stop1 = new Stop(net1, 'stop1');
 stop1.setField('title', "🚂 Station");
-var vehicle1 = new Vehicle(route1, '14');
+var vehicle1 = new Vehicle(route1, '9015450000602417');
 vehicle1.setField('lastUpdated', "yesterday");
 
 // Module under test
@@ -246,7 +246,7 @@ test('Vehicle Render', async test => {
 	function dataFetcher() {
 		test.fail("Unneeded call to dataFetcher");
 	}
-	const result = await Controller(getTemplate, dataFetcher).process('/vehicle/net1/route1/14');
+	const result = await Controller(getTemplate, dataFetcher).process('/vehicle/net1/route1/9015450000602417');
 	test.is(result.action, 'response');
 	test.is(result.body, 'StartPage vehicle EndPage Galaxy Clipper (ROUTEFACE)');
 	test.deepEqual(result.headers, {
@@ -337,7 +337,7 @@ test('Vehicle Partial Render', async test => {
 	function dataFetcher() {
 		test.fail("Unneeded call to dataFetcher");
 	}
-	const result = await Controller(getTemplate, dataFetcher).process('/vehicle/net1/route1/14', {accept: 'text/partial-html'});
+	const result = await Controller(getTemplate, dataFetcher).process('/vehicle/net1/route1/9015450000602417', {accept: 'text/partial-html'});
 	test.is(result.action, 'response');
 	test.is(result.body, 'vehicle Galaxy Clipper (ROUTEFACE)');
 	test.deepEqual(result.headers, {
@@ -346,7 +346,7 @@ test('Vehicle Partial Render', async test => {
 		'title': 'Galaxy Clipper (ROUTEFACE)',
 		'cssClass': 'route_route1 network_net1 vehicle_galaxyclipper',
 		'classType': 'Vehicle',
-		'classID': 'Vehicle-net1,route1,14',
+		'classID': 'Vehicle-net1,route1,9015450000602417',
 		'lastUpdated': 'yesterday',
 	});
 });
