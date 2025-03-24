@@ -8,15 +8,16 @@
 	"7": "Cyclone Clipper",
 	"8": "Typhoon Clipper",
 	"9": "Tornado Clipper",
-	"10": "Monsoon Clipper",
+	"9015450000107246": "Monsoon Clipper",
 	"11": "Aurora Clipper",
 	"12": "Hurricane Clipper",
 	"13": "Twin Star",
-	"14": "Galaxy Clipper",
+	"9015450000602417": "Galaxy Clipper",
 	"9015450000602427": "Neptune Clipper",
 	"16": "Mercury Clipper",
         "17": "Jupiter Clipper",
-        "18": "Venus Clipper"
+        "18": "Venus Clipper",
+	"9015450000602412": "Earth Clipper"
 
 
 }
