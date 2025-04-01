@@ -27,7 +27,7 @@ const Controller = ControllerClass(templateid => {
 			return NRFetcher.fetchData(type, id, params);
 	}
 });
-app.get('*', function(req, res, next) {
+app.get('*splat', function(req, res, next) {
 	Controller.process(req.path, {accept: req.get("accept")}, req.query).then(result => {
 		switch (result.action) {
 			case 'response':
@@ -115,9 +115,6 @@ app.use('/resources/templates', express.static('templates', {maxAge:'2m'}));
 var server = app.listen(process.env.PORT || 3000, function () {
   console.log('App listening at http://%s:%s', server.address().address, server.address().port);
 });
-app.get('/simple', function (req, res) {
-	
-})
 
 localdata.start();
 boatdata.start();
