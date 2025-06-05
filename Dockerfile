@@ -9,8 +9,9 @@ COPY src ./
 
 ## Run the build step and then delete everything which only gets used for the build
 RUN npm run build
-RUN npm prune --omit=dev
-RUN rm -rf client.js serviceworker.js webpack*
+
+RUN rm -rf node_modules client.js serviceworker.js webpack*
+RUN npm install --omit=dev
 
 ENV NODE_ENV production
 ENV PORT 3000
