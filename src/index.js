@@ -84,11 +84,7 @@ app.get('/serviceworker.js', function (req, res) {
 app.get('/_info', function (req, res) {
 	const output = {
 		system: 'tfluke_app',
-		checks: {
-			/*"tfl-api": {
-				techDetail: "Can connect to tfl API",
-			}*/
-		},
+		checks: {},
 		metrics: {},
 		ci: {
 			circle: "gh/lucas42/tfluke",
@@ -98,17 +94,7 @@ app.get('/_info', function (req, res) {
 		title: "Transport",
 		show_on_homepage: true,
 	};
-	TFLFetcher.fetchData('route', 'victoria').then(() => {
-		output.checks['tfl-api'].ok = true;
-	}).catch(error => {
-
-		/** HACK: This check is really quite noisey, so hide it from output for now if it fails **/
-		delete output.checks['tfl-api'];
-		//output.checks['tfl-api'].ok = false;
-		//output.checks['tfl-api'].debug = error.message;
-	}).then(() => {
-		res.send(output);
-	});
+	res.send(output);
 });
 app.use('/img', express.static('img', {maxAge:'5m'}));
 app.use('/resources/templates', express.static('templates', {maxAge:'2m'}));
