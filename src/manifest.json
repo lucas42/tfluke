@@ -1,0 +1,22 @@
+{
+	"name": "TFLuke",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"theme_color": "#000",
+	"background_color": "#ccf",
+	"icons":[
+		{
+			"src": "/img/icon.png",
+			"sizes": "100x100",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/img/maskable_icon.png",
+			"sizes": "125x125",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	]
+}

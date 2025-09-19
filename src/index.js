@@ -72,6 +72,9 @@ app.get('/data.json', function (req, res) {
 app.get('/resources/style.css', function (req, res) {
 	res.sendFile('style.css', {root: '.', maxAge:'2m'});
 });
+app.get('/resources/manifest.json', function (req, res) {
+	res.sendFile('manifest.json', {root: '.', maxAge:'2m'});
+});
 app.get('/resources/fonts/led', function (req, res) {
 	res.sendFile('fonts/led.ttf', {root: '.', maxAge:'30m'});
 });
