@@ -30,7 +30,7 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "express": "^5.2.0",
+    "express": "^5.2.1",
     "fs-readfile-promise": "^3.0.1",
     "lucos_pubsub": "^1.0.2",
     "mustache": "^4.2.0"
