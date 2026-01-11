@@ -3,8 +3,9 @@ services:
     build: .
     container_name: tfluke
     ports: 
-      - "3000:3000"
+      - $PORT:$PORT
     environment:
       - TFL_KEY
+      - PORT
     image: lucas42/tfluke
     restart: always

@@ -101,7 +101,8 @@ app.get('/_info', function (req, res) {
 });
 app.use('/img', express.static('img', {maxAge:'5m'}));
 app.use('/resources/templates', express.static('templates', {maxAge:'2m'}));
-var server = app.listen(process.env.PORT || 3000, function () {
+if (!process.env.PORT) throw 'Environment variable PORT not set';
+var server = app.listen(process.env.PORT, function () {
   console.log('App listening at http://%s:%s', server.address().address, server.address().port);
 });
 

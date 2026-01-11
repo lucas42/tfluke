@@ -14,7 +14,5 @@ RUN rm -rf node_modules client.js serviceworker.js webpack*
 RUN npm install --omit=dev
 
 ENV NODE_ENV production
-ENV PORT 3000
-EXPOSE $PORT
 
 CMD [ "npm", "start" ]
