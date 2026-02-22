@@ -3,7 +3,7 @@ A web app for keeping track of public transport, particularly on forms of transp
 
 ## Dependencies
 * docker
-* docker-compose
+* docker compose
 
 ## Build-time Dependencies
 * nodejs
