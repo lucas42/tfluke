@@ -20,6 +20,7 @@ workflows:
       - test
       - deploy/build-amd64
       - deploy/deploy-avalon:
+          serial-group: << pipeline.project.slug >>/deploy-avalon
           requires:
             - test
             - deploy/build-amd64
