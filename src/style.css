@@ -294,6 +294,8 @@ h2, h3{
 }
 
 /** Train pages see http://www.tfl.gov.uk/assets/downloads/corporate/tfl-line-diagram-standard-issue03.pdf **/
+/* Fix the width of the time element on train pages so its size doesn't change as the countdown ticks, preventing stop height from varying */
+.route > .stop .stoptime { display: inline-block; min-width: 6em; text-align: right; }
 .journey { position: relative; margin: 10px 0; }
 .journey .journeyname { width: 1ex; position: absolute; left: 31px; margin: 0; top: 0.8ex; bottom: 0.9ex; box-sizing: border-box; }
 .journey .journeyname .routename, .journey .continues .destination { display: none; }
