@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  deploy: lucos/deploy@0
+  lucos: lucos/deploy@0
 jobs:
   test:
     docker:
@@ -18,12 +18,12 @@ workflows:
   build-deploy:
     jobs:
       - test
-      - deploy/build-amd64
-      - deploy/deploy-avalon:
+      - lucos/build-amd64
+      - lucos/deploy-avalon:
           serial-group: << pipeline.project.slug >>/deploy-avalon
           requires:
             - test
-            - deploy/build-amd64
+            - lucos/build-amd64
           filters:
             branches:
               only:
