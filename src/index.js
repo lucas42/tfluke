@@ -1,6 +1,5 @@
 import express from 'express';
 import { rateLimit } from 'express-rate-limit';
-import he from 'he';
 
 import readFile from 'fs-readfile-promise'
 import TFLFetcher from './fetchers/tfl.js'
@@ -24,6 +23,7 @@ const staticFileLimiter = rateLimit({
 });
 
 var app = express();
+app.use((req, res, next) => { res.set('X-Content-Type-Options', 'nosniff'); next(); });
 app.set('view engine', 'html');
 app.set('views', './templates');
 const Controller = ControllerClass(templateid => {
@@ -47,7 +47,7 @@ app.get('*splat', function(req, res, next) {
 				res.redirect(result.path);
 				break;
 			case 'notfound':
-				res.status(404).type('text/plain').send(he.encode(result.message));
+				res.status(404).type('text/plain').send(result.message);
 				break;
 			case 'unknown':
 				next();
@@ -63,7 +63,7 @@ app.get('*splat', function(req, res, next) {
 			res.status(502).send("A request to an upstream timed out.  Please try again later.");
 		} else {
 			console.trace(error);
-			res.status(500).type('text/plain').send("An error occurred: "+he.encode(String(error)));
+			res.status(500).type('text/plain').send("An error occurred: "+error);
 		}
 	});
 });
