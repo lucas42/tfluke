@@ -23,6 +23,7 @@ const staticFileLimiter = rateLimit({
 });
 
 var app = express();
+app.use((req, res, next) => { res.set('X-Content-Type-Options', 'nosniff'); next(); });
 app.set('view engine', 'html');
 app.set('views', './templates');
 const Controller = ControllerClass(templateid => {
