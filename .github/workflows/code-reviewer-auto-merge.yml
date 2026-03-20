@@ -1,0 +1,16 @@
+name: Auto-merge on code reviewer approval
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  reusable:
+    uses: lucas42/.github/.github/workflows/code-reviewer-auto-merge.yml@main
+    secrets:
+      CODE_REVIEWER_APP_ID: ${{ secrets.CODE_REVIEWER_APP_ID }}
+      CODE_REVIEWER_PRIVATE_KEY: ${{ secrets.CODE_REVIEWER_PRIVATE_KEY }}
