@@ -103,9 +103,9 @@ function stationsMatch(a, b) {
 	function normalise(stationname) {
 		return stationname.toLowerCase()
 		.replace(/via .*/, '')
-		.replace(/[\+\&]/, "and")
+		.replace(/[+&]/g, "and")
 		.replace(" street ", " st ")
-		.replace("'", "")
+		.replace(/'/g, "")
 		.replace(/\(.*\)/, '')
 		.replace(/\s*$/, '')
 		.replace(/^\s*/, '');

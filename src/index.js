@@ -1,4 +1,5 @@
 import express from 'express';
+import { rateLimit } from 'express-rate-limit';
 
 import readFile from 'fs-readfile-promise'
 import TFLFetcher from './fetchers/tfl.js'
@@ -13,6 +14,14 @@ import Platform from './classes/platform.js'
 import Event from './classes/event.js'
 import localdata from './sources/localdata.js'
 import boatdata from './sources/boatdata.js'
+
+const staticFileLimiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	limit: 100,
+	standardHeaders: true,
+	legacyHeaders: false,
+});
+
 var app = express();
 app.set('view engine', 'html');
 app.set('views', './templates');
@@ -37,7 +46,7 @@ app.get('*splat', function(req, res, next) {
 				res.redirect(result.path);
 				break;
 			case 'notfound':
-				res.status(404).send(result.message);
+				res.status(404).type('text/plain').send(result.message);
 				break;
 			case 'unknown':
 				next();
@@ -53,7 +62,7 @@ app.get('*splat', function(req, res, next) {
 			res.status(502).send("A request to an upstream timed out.  Please try again later.");
 		} else {
 			console.trace(error);
-			res.status(500).send("An error occurred: "+error);
+			res.status(500).type('text/plain').send("An error occurred: "+error);
 		}
 	});
 });
@@ -69,19 +78,19 @@ app.get('/data.json', function (req, res) {
 	};
 	res.send(output);
 });
-app.get('/resources/style.css', function (req, res) {
+app.get('/resources/style.css', staticFileLimiter, function (req, res) {
 	res.sendFile('style.css', {root: '.', maxAge:'2m'});
 });
-app.get('/resources/manifest.json', function (req, res) {
+app.get('/resources/manifest.json', staticFileLimiter, function (req, res) {
 	res.sendFile('manifest.json', {root: '.', maxAge:'2m'});
 });
-app.get('/resources/fonts/led', function (req, res) {
+app.get('/resources/fonts/led', staticFileLimiter, function (req, res) {
 	res.sendFile('fonts/led.ttf', {root: '.', maxAge:'30m'});
 });
-app.get('/resources/script.js', function (req, res) {
+app.get('/resources/script.js', staticFileLimiter, function (req, res) {
 	res.sendFile('bin/clientscripts.js', {root: '.', maxAge:'2m'});
 });
-app.get('/serviceworker.js', function (req, res) {
+app.get('/serviceworker.js', staticFileLimiter, function (req, res) {
 	res.sendFile('bin/serviceworker.js', {root: '.', maxAge:'2m'});
 });
 app.get('/_info', function (req, res) {
