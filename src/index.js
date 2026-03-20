@@ -15,14 +15,6 @@ import Event from './classes/event.js'
 import localdata from './sources/localdata.js'
 import boatdata from './sources/boatdata.js'
 
-function htmlEscape(str) {
-	return String(str)
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;');
-}
-
 const staticFileLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
 	limit: 100,
@@ -54,7 +46,7 @@ app.get('*splat', function(req, res, next) {
 				res.redirect(result.path);
 				break;
 			case 'notfound':
-				res.status(404).send(htmlEscape(result.message));
+				res.status(404).type('text/plain').send(result.message);
 				break;
 			case 'unknown':
 				next();
@@ -70,7 +62,7 @@ app.get('*splat', function(req, res, next) {
 			res.status(502).send("A request to an upstream timed out.  Please try again later.");
 		} else {
 			console.trace(error);
-			res.status(500).send("An error occurred: "+htmlEscape(error));
+			res.status(500).type('text/plain').send("An error occurred: "+error);
 		}
 	});
 });
