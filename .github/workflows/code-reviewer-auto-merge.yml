@@ -8,7 +8,8 @@ on:
     types:
       - closed
 
-permissions: {}
+permissions:
+  contents: read
 
 jobs:
   reusable:
