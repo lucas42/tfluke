@@ -8,6 +8,8 @@ on:
     types:
       - closed
 
+permissions: {}
+
 jobs:
   reusable:
     uses: lucas42/.github/.github/workflows/code-reviewer-auto-merge.yml@main
