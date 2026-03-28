@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   reusable:
-    uses: lucas42/.github/.github/workflows/code-reviewer-auto-merge.yml@main
+    uses: lucas42/.github/.github/workflows/code-reviewer-auto-merge.yml@fa6177c065517f4c8cb8938730c3bc27ff5c2f0d
     secrets:
       CODE_REVIEWER_APP_ID: ${{ secrets.CODE_REVIEWER_APP_ID }}
       CODE_REVIEWER_PRIVATE_KEY: ${{ secrets.CODE_REVIEWER_PRIVATE_KEY }}
