@@ -9,4 +9,4 @@ permissions:
 
 jobs:
   dependabot:
-    uses: lucas42/.github/.github/workflows/dependabot-auto-merge.yml@main
+    uses: lucas42/.github/.github/workflows/dependabot-auto-merge.yml@fa6177c065517f4c8cb8938730c3bc27ff5c2f0d
