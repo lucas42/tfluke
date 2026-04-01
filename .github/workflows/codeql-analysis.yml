@@ -19,6 +19,11 @@ on:
     branches: [ main ]
   schedule:
     - cron: '28 5 * * *'
+  workflow_run:
+    # Re-run CodeQL after auto-merge workflows complete, because merges done
+    # with GITHUB_TOKEN (github-actions[bot]) don't trigger push-based workflows.
+    workflows: ["Dependabot auto-merge", "Auto-merge on code reviewer approval"]
+    types: [completed]
 
 permissions: {}
 
