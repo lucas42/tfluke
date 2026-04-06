@@ -9,4 +9,4 @@ permissions:
 
 jobs:
   convention-check:
-    uses: lucas42/.github/.github/workflows/reusable-convention-check.yml@v1.0.0
+    uses: lucas42/.github/.github/workflows/reusable-convention-check.yml@v1.2.0
