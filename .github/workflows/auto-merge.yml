@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   dependabot:
-    uses: lucas42/.github/.github/workflows/reusable-dependabot-auto-merge.yml@v1.4.0
+    uses: lucas42/.github/.github/workflows/reusable-dependabot-auto-merge.yml@v1.5.0
     secrets:
       CODE_REVIEWER_APP_ID: ${{ secrets.CODE_REVIEWER_APP_ID }}
       CODE_REVIEWER_PRIVATE_KEY: ${{ secrets.CODE_REVIEWER_PRIVATE_KEY }}
