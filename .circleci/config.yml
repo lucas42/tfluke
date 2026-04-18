@@ -18,7 +18,8 @@ workflows:
   build-deploy:
     jobs:
       - test
-      - lucos/build-amd64
+      - lucos/build-amd64:
+          serial-group: << pipeline.project.slug >>/build
       - lucos/deploy-avalon:
           serial-group: << pipeline.project.slug >>/deploy-avalon
           requires:
