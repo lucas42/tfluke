@@ -7,7 +7,7 @@ services:
     environment:
       - TFL_KEY
       - PORT
-    image: lucas42/tfluke
+    image: lucas42/tfluke:${VERSION:-latest}
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "curl -sf http://127.0.0.1:$PORT/_info"]

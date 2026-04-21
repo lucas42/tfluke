@@ -1,5 +1,8 @@
 FROM node:25-alpine
 
+ARG VERSION
+ENV VERSION=$VERSION
+
 RUN apk add --no-cache curl
 
 WORKDIR /usr/src/app
