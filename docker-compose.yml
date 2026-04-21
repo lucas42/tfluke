@@ -10,7 +10,7 @@ services:
     image: lucas42/tfluke
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://127.0.0.1:$PORT/_info"]
+      test: ["CMD-SHELL", "curl -sf http://127.0.0.1:$PORT/_info"]
       interval: 10s
       timeout: 5s
       retries: 3
