@@ -47,7 +47,7 @@ app.get('*splat', function(req, res, next) {
 				res.redirect(result.path);
 				break;
 			case 'notfound':
-				res.status(404).type('text/plain').send(result.message);
+				res.status(404).type('text/plain').send(result.message.replace(/[<>&"]/g, ''));
 				break;
 			case 'unknown':
 				next();
@@ -63,7 +63,7 @@ app.get('*splat', function(req, res, next) {
 			res.status(502).send("A request to an upstream timed out.  Please try again later.");
 		} else {
 			console.trace(error);
-			res.status(500).type('text/plain').send("An error occurred: "+error);
+			res.status(500).type('text/plain').send("An internal error occurred.");
 		}
 	});
 });
