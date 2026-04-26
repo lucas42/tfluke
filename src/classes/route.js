@@ -44,7 +44,7 @@ Route.prototype.getCssClass = function getCssClass() {
 	return cssClass;
 }
 Route.prototype.getQualifiedName = function getQualifiedName() {
-	var name = this.getField("title") || "";
+	var name = String(this.getField("title") || "");
 	if (name) name = name.charAt(0).toUpperCase() + name.slice(1);
 	var network = this.getNetwork().getCode();
 	if (this.getField("mode") == "tube" || this.getField("mode") == "overground" || this.getField("mode") == "elizabeth-line") {

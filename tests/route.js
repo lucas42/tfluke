@@ -18,6 +18,15 @@ test('Create Route', test => {
 	test.is(route.getQualifiedName(), 'Id246');
 	test.is(route.getSymbol(), false);
 });
+test('getQualifiedName with non-string title does not throw', test => {
+	var network = new Network('id999');
+	var route = new Route(network, 'id999');
+	// Simulate TfL returning a non-string name field (e.g. null or a number)
+	route.setField('title', null);
+	test.notThrows(() => route.getQualifiedName());
+	route.setField('title', 42);
+	test.notThrows(() => route.getQualifiedName());
+});
 test('Refresh Route', test => {
 	var network = new Network('id123');
 	var route = new Route(network, 'id246');
