@@ -318,7 +318,9 @@ h2, h3{
 /* Terminuses */
 .route > .stop:not(.interchange):first-child, .route > .stop:not(.interchange):last-child { margin-top: 0; margin-bottom: 0; }
 .route > .stop:first-child { margin-top: 0; }
-.route > .stop:last-child { margin-bottom: 0; height: 1.2em;}
+.route > .stop:last-child { margin-bottom: 0; }
+.route > .stop:not(.interchange):last-child { height: 1.2em; }
+.route > .stop.interchange:last-child { overflow: hidden; }
 .route > .stop:not(.interchange):first-child:before, .route > .stop:not(.interchange):last-child:before { width: 2.32ex; margin-left: -3.26ex; }
 
 .route > .stop:before, .route .continues:after { border-color:#000099;}
