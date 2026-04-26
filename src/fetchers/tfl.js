@@ -19,6 +19,10 @@ function tflapireq(path) {
 	if (process.env.TFL_KEY) url += encodeURIComponent(process.env.TFL_KEY);
 	return fetch(url, {timeout: 5000}).then(response => {
 		if (response.status == 429) throw new Error(`TFL API Rate Limited`);
+		if (response.status == 404) {
+			console.log(`TfL API returned 404 for ${path} (expected given TfL data quality)`);
+			throw 'notfound';
+		}
 		if (response.status != 200) throw new Error(`Unexpected status code ${response.status}, ${path}`);
 		return response.json().then(data => {
 			return {
@@ -265,6 +269,7 @@ export function fetchData(type, id, params) {
 			} else {
 				vehicleId = vehicleIdComponents[0];
 			}
+			if (!vehicleId) return Promise.reject("notfound");
 			return tflapireq("/Vehicle/"+vehicleId+"/Arrivals").then(({data, date}) => {
 				data.forEach(function (arrival) {
 
@@ -303,7 +308,7 @@ export async function loadAllRoutes() {
 			const {stops} = await fetchData('route', route.code);
 		}
 	} catch(error) {
-		console.error("Error occured while preloading stops", error);
+		if (error !== 'notfound') console.error("Error occured while preloading stops", error);
 	}
 }
 
