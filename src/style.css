@@ -167,7 +167,7 @@ These were collected manually, without taking account of variations in light
 .vehicle_mercuryclipper .route > .stop:before, .vehicle_mercuryclipper .route .continues:after { border-color:#85908b; }
 
 /** General **/
-body { background: #ccf; margin: 0; min-height: 100%; position: absolute; width: 100%; box-sizing: border-box; padding-bottom: 3em; }
+body { background: #ccf; margin: 0; min-height: 100vh; position: relative; width: 100%; box-sizing: border-box; padding-bottom: 3em; }
 .route a, a.route { text-decoration: none; }
 .route h3, .route h1 { text-decoration: none; text-align: center; clear: both; padding: 0; }
 .route .status {font-weight: bold; }
