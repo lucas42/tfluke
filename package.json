@@ -33,6 +33,7 @@
     "folder-hash": {
       "minimatch": "^7.4.7"
     },
+    "ip-address": ">=10.1.1",
     "minimatch": "^5.1.7",
     "serialize-javascript": ">=7.0.3"
   },
