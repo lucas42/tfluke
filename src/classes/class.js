@@ -3,6 +3,9 @@ export default function Class(classname, keynames, constructor) {
 
 	if (typeof keynames == "string") keynames = [keynames];
 	var all = {};
+	// reverseIndex[relationName][thingIndex] = [parentInstance, ...]
+	// Maintained by addThing/removeThing to make getByRelatedThing O(1)
+	var reverseIndex = {};
 	function update(index, data) {
 		var instance = new SpecificThing(index);
 		instance.setData(data);
@@ -25,17 +28,11 @@ export default function Class(classname, keynames, constructor) {
 		return output;
 	}
 	function getByRelatedThing(relation, thing) {
-		var relations, relatedinstance, output = [];
-		for (var key in all) {
-			const relatedthings = all[key].relations[relation].get();
-			for (var i = 0; i < relatedthings.length; i++) {
-				if (relatedthings[i] == thing) {
-					output.push(all[key]);
-					continue;
-				}
-			}
-		}
-		return output;
+		var entries = reverseIndex[relation] && reverseIndex[relation][thing.getIndex()];
+		if (!entries) return [];
+		// Filter out stale entries for instances deleted via deleteSelf() without
+		// going through removeThing (e.g. deleteSelf doesn't call removeStop per stop).
+		return entries.filter(function(instance) { return instance.getIndex() in all; });
 	}
 
 	/**
@@ -195,13 +192,27 @@ export default function Class(classname, keynames, constructor) {
 		function addThing(instance) {
 			if (hasThing(instance)) return;
 			instances[instance.getIndex()] = instance;
+			// Update the reverse index so getByRelatedThing can look up parents directly
+			if (!reverseIndex[relation.singular]) reverseIndex[relation.singular] = {};
+			var key = instance.getIndex();
+			if (!reverseIndex[relation.singular][key]) reverseIndex[relation.singular][key] = [];
+			reverseIndex[relation.singular][key].push(thisinstance);
 			if (relation.symmetrical && thisinstance != instance) {
 				instance.relations[relation.singular].add(thisinstance);
-			}  
+			}
 		}
 		function removeThing(instance) {
 			if (!hasThing(instance)) return;
 			delete instances[instance.getIndex()];
+			// Remove thisinstance from the reverse index
+			var key = instance.getIndex();
+			if (reverseIndex[relation.singular] && reverseIndex[relation.singular][key]) {
+				var idx = reverseIndex[relation.singular][key].indexOf(thisinstance);
+				if (idx !== -1) reverseIndex[relation.singular][key].splice(idx, 1);
+				if (reverseIndex[relation.singular][key].length === 0) {
+					delete reverseIndex[relation.singular][key];
+				}
+			}
 			if (relation.symmetrical && thisinstance != instance) {
 				instance.relations[relation.singular].remove(thisinstance);
 			}

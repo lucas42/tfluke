@@ -59,6 +59,26 @@ test('Get By Stop', test => {
 	test.deepEqual(Route.getByStop(stop2), [route1,route3]);
 	test.deepEqual(Route.getByStop(stop3), [route1,route2,route3]);
 });
+test('Get By Stop: removeStop updates reverse index', test => {
+	var network = new Network('rev-idx-net1');
+	var stop = new Stop(network, 'rev-idx-stop1');
+	var route = new Route(network, 'rev-idx-route1');
+	route.addStop(stop);
+	test.deepEqual(Route.getByStop(stop), [route]);
+	route.removeStop(stop);
+	test.deepEqual(Route.getByStop(stop), []);
+});
+test('Get By Stop: deleted route excluded from reverse index results', test => {
+	var network = new Network('rev-idx-net2');
+	var stop = new Stop(network, 'rev-idx-stop2');
+	var route = new Route(network, 'rev-idx-route2');
+	route.addStop(stop);
+	test.deepEqual(Route.getByStop(stop), [route]);
+	// deleteSelf removes from `all` without calling removeStop — stale entry in reverse index
+	route.deleteSelf();
+	// getByStop should filter the stale entry out
+	test.deepEqual(Route.getByStop(stop), []);
+});
 test('Route List', test => {
 	var network = new Network('id345');
 	var route1 = new Route(network, 'route1');
