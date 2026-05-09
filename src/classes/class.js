@@ -36,7 +36,7 @@ export default function Class(classname, keynames, constructor) {
 		var output = [];
 		for (var i = entries.length - 1; i >= 0; i--) {
 			if (entries[i].getIndex() in all) {
-				output.push(entries[i]);
+				output.unshift(entries[i]);
 			} else {
 				entries.splice(i, 1);
 			}

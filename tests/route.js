@@ -84,6 +84,8 @@ test('Get By Stop: stale reverse index entry purged in-place on first lookup', t
 	var stop = new Stop(network, 'rev-idx-stop3');
 	var route = new Route(network, 'rev-idx-route3');
 	route.addStop(stop);
+	// Confirm the entry is present before deletion
+	test.deepEqual(Route.getByStop(stop), [route]);
 	// deleteSelf leaves a stale entry in the reverse index
 	route.deleteSelf();
 	// First call should filter and purge the stale entry
