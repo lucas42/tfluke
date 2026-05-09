@@ -30,9 +30,18 @@ export default function Class(classname, keynames, constructor) {
 	function getByRelatedThing(relation, thing) {
 		var entries = reverseIndex[relation] && reverseIndex[relation][thing.getIndex()];
 		if (!entries) return [];
-		// Filter out stale entries for instances deleted via deleteSelf() without
+		// Iterate backwards so splice doesn't shift unvisited indices.
+		// Purge stale entries in-place for instances deleted via deleteSelf() without
 		// going through removeThing (e.g. deleteSelf doesn't call removeStop per stop).
-		return entries.filter(function(instance) { return instance.getIndex() in all; });
+		var output = [];
+		for (var i = entries.length - 1; i >= 0; i--) {
+			if (entries[i].getIndex() in all) {
+				output.push(entries[i]);
+			} else {
+				entries.splice(i, 1);
+			}
+		}
+		return output;
 	}
 
 	/**

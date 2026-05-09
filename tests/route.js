@@ -79,6 +79,20 @@ test('Get By Stop: deleted route excluded from reverse index results', test => {
 	// getByStop should filter the stale entry out
 	test.deepEqual(Route.getByStop(stop), []);
 });
+test('Get By Stop: stale reverse index entry purged in-place on first lookup', test => {
+	var network = new Network('rev-idx-net3');
+	var stop = new Stop(network, 'rev-idx-stop3');
+	var route = new Route(network, 'rev-idx-route3');
+	route.addStop(stop);
+	// deleteSelf leaves a stale entry in the reverse index
+	route.deleteSelf();
+	// First call should filter and purge the stale entry
+	test.deepEqual(Route.getByStop(stop), []);
+	// Add a new live route — the purged stale entry must not reappear
+	var route2 = new Route(network, 'rev-idx-route3b');
+	route2.addStop(stop);
+	test.deepEqual(Route.getByStop(stop), [route2]);
+});
 test('Route List', test => {
 	var network = new Network('id345');
 	var route1 = new Route(network, 'route1');
