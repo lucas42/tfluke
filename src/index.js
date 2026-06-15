@@ -97,7 +97,7 @@ app.get('/serviceworker.js', staticFileLimiter, function (req, res) {
 });
 app.get('/_info', function (req, res) {
 	const output = {
-		system: process.env.SYSTEM,
+		system: process.env.SYSTEM || 'tfluke',
 		checks: {},
 		metrics: {},
 		ci: {
