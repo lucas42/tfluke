@@ -35,7 +35,10 @@
     },
     "ip-address": ">=10.1.1",
     "minimatch": "^5.1.7",
-    "serialize-javascript": ">=7.0.3"
+    "serialize-javascript": ">=7.0.3",
+    "webpack-cli": {
+      "js-yaml": ">=5.2.1"
+    }
   },
   "dependencies": {
     "express": "^5.2.1",
