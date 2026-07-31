@@ -37,7 +37,7 @@
     "minimatch": "^5.1.7",
     "serialize-javascript": ">=7.0.3",
     "webpack-cli": {
-      "js-yaml": ">=5.2.1"
+      "js-yaml": ">=5.2.2"
     }
   },
   "dependencies": {
