@@ -38,6 +38,12 @@
     "serialize-javascript": ">=7.0.3",
     "webpack-cli": {
       "js-yaml": ">=5.2.2"
+    },
+    "supertap": {
+      "js-yaml": ">=3.15.2 <4.0.0"
+    },
+    "tap-xunit": {
+      "js-yaml": ">=3.15.2 <4.0.0"
     }
   },
   "dependencies": {
