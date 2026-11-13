@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "express": "^5.3.0",
-    "express-rate-limit": "^8.7.3",
+    "express-rate-limit": "^8.7.4",
     "fs-readfile-promise": "^3.0.1",
     "lucos_pubsub": "^1.0.2",
     "mustache": "^4.2.0"
